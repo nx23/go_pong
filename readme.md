@@ -32,7 +32,7 @@ Run the game:
     - High score tracking
 
 ## Dependencies
-    [Ebiten](https://github.com/hajimehoshi/ebiten) - A dead simple 2D game library for Go
+[Ebiten](https://github.com/hajimehoshi/ebiten) - A dead simple 2D game library for Go
 
 ## License
 This project is licensed under the MIT License.
