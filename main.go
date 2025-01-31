@@ -30,7 +30,7 @@ type Paddle struct {
 
 type Ball struct {
 	Object
-	VX, VY int // X and Y velocity
+	VX, VY int // X and Y ball velocity
 }
 
 type Game struct {
@@ -170,7 +170,8 @@ func (g *Game) CollideWithWall() {
 }
 
 func (g *Game) CollideWithPaddle() {
-	if g.ball.X >= g.paddle.X && g.ball.Y >= g.paddle.Y && g.ball.Y <= g.paddle.Y + g.paddle.H {
+	if g.ball.X <= g.paddle.X + g.paddle.W && g.ball.X + g.ball.W >= g.paddle.X &&
+		g.ball.Y + g.ball.H >= g.paddle.Y && g.ball.Y <= g.paddle.Y + g.paddle.H {
 		g.ball.VX = -g.ball.VX
 		g.score++
 
