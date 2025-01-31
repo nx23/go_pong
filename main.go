@@ -135,13 +135,13 @@ func (g *Game) Update() error {
 }
 
 func (p *Paddle) MoveOnKeyPress() {
-	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) {
-		p.Y -= paddleSpeed
-	}
+    if ebiten.IsKeyPressed(ebiten.KeyArrowUp) && p.Y > 0 {
+        p.Y -= paddleSpeed
+    }
 
-	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) {
-		p.Y += paddleSpeed
-	}
+    if ebiten.IsKeyPressed(ebiten.KeyArrowDown) && p.Y < screenHeight - p.H {
+        p.Y += paddleSpeed
+    }
 }
 
 func (b *Ball) Move() {
