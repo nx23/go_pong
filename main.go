@@ -16,9 +16,11 @@ import (
 const (
 	screenWidth = 640
 	screenHeight = 480
-	ballSpeed = 3
 	paddleSpeed = 6
+	ballSpeedDefault = 3
 )
+
+var ballSpeed = 3
 
 type Object struct {
 	X, Y, W, H int
@@ -152,12 +154,15 @@ func (b *Ball) Move() {
 func (g *Game) Reset() {
 	g.ball.X = 0
 	g.ball.Y = 0
+	ballSpeed = ballSpeedDefault
+	g.ball.VX = ballSpeedDefault
+	g.ball.VY = ballSpeedDefault
 
 	g.score = 0
 }
 
 func (g *Game) CollideWithWall() {
-	// If the ball hits the right wall the game is over
+	// If the ball pass the paddle the game is over
 	if g.ball.X > g.paddle.X {
 		g.Reset()
 	} else if g.ball.X <= 0 {
@@ -170,13 +175,27 @@ func (g *Game) CollideWithWall() {
 }
 
 func (g *Game) CollideWithPaddle() {
-	if g.ball.X <= g.paddle.X + g.paddle.W && g.ball.X + g.ball.W >= g.paddle.X &&
-		g.ball.Y + g.ball.H >= g.paddle.Y && g.ball.Y <= g.paddle.Y + g.paddle.H {
-		g.ball.VX = -g.ball.VX
-		g.score++
+	if g.ball.X <= g.paddle.X + g.paddle.W &&
+		g.ball.X + g.ball.W >= g.paddle.X &&
+		g.ball.Y + g.ball.H >= g.paddle.Y &&
+		g.ball.Y <= g.paddle.Y + g.paddle.H {
 
+		g.increaseScore()
+		if g.score % 5 == 0 {
+			g.increaseBallSpeedBy(2)
+		}
+
+		g.ball.VX = -ballSpeed
 		if g.score > g.highScore {
 			g.highScore = g.score
 		}
 	}
+}
+
+func (g *Game) increaseScore() {
+	g.score++
+}
+
+func (g *Game) increaseBallSpeedBy(increase int) {
+	ballSpeed += increase
 }
