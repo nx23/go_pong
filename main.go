@@ -158,7 +158,7 @@ func (g *Game) Reset() {
 
 func (g *Game) CollideWithWall() {
 	// If the ball hits the right wall the game is over
-	if g.ball.X > screenWidth {
+	if g.ball.X > g.paddle.X {
 		g.Reset()
 	} else if g.ball.X <= 0 {
 		g.ball.VX = ballSpeed
