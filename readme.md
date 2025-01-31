@@ -18,9 +18,9 @@ This is a simple Pong game implemented using the Ebiten game library in Go.
 ## Usage
 
 Run the game:
-    ```sh
-    go run main.go
-    ```
+```sh
+go run main.go
+```
 
 ## Controls
     Arrow Up: Move paddle up
